@@ -12,21 +12,21 @@ app.use(cors({
     methods: ["POST"],
   }));
 
-app.use((req, res, next) => {
+  app.use((req, res, next) => {
     const apiKey = req.headers["x-api-key"];
     const origin = req.headers["origin"];
   
-    if (apiKey !== process.env.MY_SECRET_KEY || !origin.startsWith(process.env.allowedOrigin)) {
+    if (apiKey === process.env.MY_SECRET_KEY && origin?.startsWith(process.env.allowedOrigin)) {
+      next(); 
+    } else {
       return res.status(403).json({ error: "Unauthorized" });
     }
-      next();
   });
-  
 app.post("/api/get-token", async(req, res) => {
 try{
    
     let totp = jsOTP.TOTP(process.env.totp);
-    let timeCode = totp.now(); // Get the time-based OTP using the secret key");
+    let timeCode = totp.now(); 
     let jData = {}
 
        jData["apkversion"]= process.env.apkversion,
