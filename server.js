@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const jsOTP = require("jsotp");
 const app = express();
-app.use(cors()); 
 app.use(express.json());
 
 let susertoken = null;
@@ -68,7 +67,6 @@ app.post("/api/search-scrip", async (req, res) => {
     const { query } = req.body;
     const userid = "FN112024"; // or use from token if dynamic
     const selectedExchange = "NSE"; // or make dynamic
-  
 const jData = JSON.stringify({
     uid: userid,
     stext: query,
