@@ -23,7 +23,7 @@ app.use((req, res, next) => {
       next();
   });
   
-app.post("/get-token", async(req, res) => {
+app.post("/api/get-token", async(req, res) => {
 try{
    
     let totp = jsOTP.TOTP(process.env.totp);
@@ -64,7 +64,7 @@ try{
 }
 
 });
-app.post("/search-scrip", async (req, res) => {
+app.post("/api/search-scrip", async (req, res) => {
     const { query } = req.body;
     const userid = "FN112024"; // or use from token if dynamic
     const selectedExchange = "NSE"; // or make dynamic
