@@ -8,15 +8,14 @@ app.use(express.json());
 let susertoken = null;
 
 app.use(cors({
-    // origin: process.env.allowedOrigin,
-    // methods: ["POST"],
+    origin: process.env.allowedOrigin,
+    methods: ["POST"],
   }));
 
   app.use((req, res, next) => {
     const apiKey = req.headers["x-api-key"];
     const origin = req.headers["origin"];
-    // && origin?.startsWith(process.env.allowedOrigin)
-    if (apiKey === process.env.MY_SECRET_KEY ) {
+    if (apiKey === process.env.MY_SECRET_KEY&& origin?.startsWith(process.env.allowedOrigin)) {
       next(); 
     } else {
       return res.status(403).json({ error: "Unauthorized" });
